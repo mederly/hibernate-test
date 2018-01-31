@@ -1,29 +1,34 @@
 package test;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author mederly
  */
+@IdClass(ExtBooleanId.class)
 @Entity
 public class ExtBoolean implements Serializable {
 
 	private AssignmentExtension owner;
-	boolean value;
 
-	@Id
+	private Integer ownerId;
+	private Boolean value;
+
+	@MapsId("owner")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	public AssignmentExtension getOwner() {
 		return owner;
 	}
 
-	public void setOwner(AssignmentExtension owner) {
-		this.owner = owner;
+	@Id
+	@Column(name="owner_owner_id")
+	public Integer getOwnerId() {
+		if (owner != null && ownerId == null) {
+			ownerId = owner.getId();
+		}
+		return ownerId;
 	}
 
 	@Id
@@ -33,6 +38,14 @@ public class ExtBoolean implements Serializable {
 
 	public void setValue(boolean value) {
 		this.value = value;
+	}
+
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public void setOwner(AssignmentExtension owner) {
+		this.owner = owner;
 	}
 
 	@Override

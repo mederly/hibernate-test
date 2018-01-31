@@ -1,8 +1,11 @@
 package test;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@IdClass(AssignmentId.class)
 @Entity
 public class Assignment implements Serializable {
 
@@ -21,7 +24,11 @@ public class Assignment implements Serializable {
 		this.id = id;
 	}
 
-	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@JoinColumns(value = {
+			@JoinColumn(name = "id", referencedColumnName = "owner_id")
+	}, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	public AssignmentExtension getExtension() {
 		return extension;
 	}
