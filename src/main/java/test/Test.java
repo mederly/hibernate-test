@@ -2,8 +2,6 @@ package test;
 
 import org.hibernate.Session;
 
-import java.util.Date;
-
 public class Test {
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
