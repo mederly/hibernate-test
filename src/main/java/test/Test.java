@@ -15,7 +15,7 @@ public class Test {
 
 		AssignmentExtension ae1 = new AssignmentExtension();
 		ae1.setOwner(a1);
-		a1.setExtension(ae1);
+		a1.getExtensions().add(ae1);
 
 		ExtBoolean eb = new ExtBoolean();
 		eb.setOwner(ae1);
@@ -32,16 +32,15 @@ public class Test {
 
 		session.beginTransaction();
 		Assignment loaded = session.get(Assignment.class, 10);
-		if (loaded.getExtension() != null) {
-			Set<ExtBoolean> booleans = loaded.getExtension().getBooleans();
-			if (booleans.size() != 1) {
-				throw new AssertionError("Unexpected size of booleans collection: " + booleans.size());
-			}
-			// temporary
-			for (ExtBoolean extBoolean : booleans) {
-				System.out.println("+++++++++++ deleting " + extBoolean);
-				session.delete(extBoolean);
-			}
+		AssignmentExtension assignmentExtension = loaded.getExtensions().iterator().next();
+		Set<ExtBoolean> booleans = assignmentExtension.getBooleans();
+		if (booleans.size() != 1) {
+			throw new AssertionError("Unexpected size of booleans collection: " + booleans.size());
+		}
+		// temporary
+		for (ExtBoolean extBoolean : booleans) {
+			System.out.println("+++++++++++ deleting " + extBoolean);
+			session.delete(extBoolean);
 		}
 		session.delete(loaded);
 		session.getTransaction().commit();

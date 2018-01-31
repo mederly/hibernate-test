@@ -2,12 +2,14 @@ package test;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Assignment implements Serializable {
 
 	private Integer id;
-	private AssignmentExtension extension;
+	private Set<AssignmentExtension> extensions = new HashSet<>();
 
 	public Assignment() {
 	}
@@ -21,12 +23,12 @@ public class Assignment implements Serializable {
 		this.id = id;
 	}
 
-	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
-	public AssignmentExtension getExtension() {
-		return extension;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
+	public Set<AssignmentExtension> getExtensions() {
+		return extensions;
 	}
 
-	public void setExtension(AssignmentExtension extension) {
-		this.extension = extension;
+	public void setExtensions(Set<AssignmentExtension> extensions) {
+		this.extensions = extensions;
 	}
 }

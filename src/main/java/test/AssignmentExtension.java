@@ -15,7 +15,7 @@ public class AssignmentExtension implements Serializable {
 	private Set<ExtBoolean> booleans = new HashSet<>();
 
 	@Id
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	public Assignment getOwner() {
 		return owner;
 	}
