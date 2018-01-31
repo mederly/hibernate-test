@@ -22,7 +22,7 @@ public class Assignment implements Serializable {
 	}
 
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
-	private AssignmentExtension getExtension() {
+	public AssignmentExtension getExtension() {
 		return extension;
 	}
 
