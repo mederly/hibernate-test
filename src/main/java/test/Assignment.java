@@ -1,5 +1,7 @@
 package test;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +22,8 @@ public class Assignment implements Serializable {
 	}
 
 	@Id
+//	@GeneratedValue(generator = "Assigned")
+//	@GenericGenerator(name = "Assigned", strategy = "org.hibernate.id.Assigned")
 	@Column(name = "owner_oid")
 	public String getOwnerOid() {
 		return ownerOid;
@@ -29,6 +33,8 @@ public class Assignment implements Serializable {
 		this.ownerOid = ownerOid;
 	}
 
+//	@GeneratedValue(generator = "Assigned")
+//	@GenericGenerator(name = "Assigned", strategy = "org.hibernate.id.Assigned")
 	@Id
 	public Integer getId() {
 		return id;

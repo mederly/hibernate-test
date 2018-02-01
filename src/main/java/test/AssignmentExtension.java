@@ -1,5 +1,7 @@
 package test;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,6 +17,8 @@ public class AssignmentExtension implements Serializable {
     private Assignment owner;
 	private Set<ExtBoolean> booleans = new HashSet<>();
 
+//	@GeneratedValue(generator = "ForeignGenerator")
+//	@GenericGenerator(name = "ForeignGenerator", strategy = "org.hibernate.id.ForeignGenerator")
 	@Id
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     public Assignment getOwner() {

@@ -1,5 +1,7 @@
 package test;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,10 +11,16 @@ import java.util.Objects;
  */
 //@IdClass(ExtBooleanId.class)
 @Entity
-public class ExtBoolean implements Serializable {
+public class ExtBoolean implements Serializable, EntityState {
+
+	private Boolean trans;
 
 	private AssignmentExtension owner;
 	private Boolean value;
+
+	public ExtBoolean() {
+		System.out.println("aaaaaaaaa");
+	}
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -20,9 +28,19 @@ public class ExtBoolean implements Serializable {
 		return owner;
 	}
 
+	@GeneratedValue(generator = "SimpleIdGenerator")
+	@GenericGenerator(name = "SimpleIdGenerator", strategy = "test.SimpleIdGenerator")
 	@Id
 	public Boolean isValue() {
 		return value;
+	}
+
+	public Boolean isTransient() {
+		return trans;
+	}
+
+	public void setTransient(Boolean trans) {
+		this.trans = trans;
 	}
 
 	public void setValue(Boolean value) {

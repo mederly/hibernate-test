@@ -27,6 +27,7 @@ public class TestMerge {
         a1.setExtension(ae1);
 
         ExtBoolean eb = new ExtBoolean();
+        eb.setTransient(true);
         eb.setOwner(ae1);
         ae1.getBooleans().add(eb);
         eb.setValue(true);

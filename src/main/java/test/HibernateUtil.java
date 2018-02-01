@@ -11,6 +11,9 @@ public class HibernateUtil {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml
 			Configuration configuration = new Configuration();
+
+			configuration.setInterceptor(new EntityStateInterceptor());
+
 			configuration.addAnnotatedClass(Assignment.class);
 			configuration.addAnnotatedClass(AssignmentExtension.class);
 			configuration.addAnnotatedClass(ExtBoolean.class);
