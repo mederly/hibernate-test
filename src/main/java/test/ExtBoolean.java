@@ -7,41 +7,26 @@ import java.util.Objects;
 /**
  * @author mederly
  */
-@IdClass(ExtBooleanId.class)
+//@IdClass(ExtBooleanId.class)
 @Entity
 public class ExtBoolean implements Serializable {
 
 	private AssignmentExtension owner;
-
-	private Integer ownerId;
 	private Boolean value;
 
-	@MapsId("owner")
+	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	public AssignmentExtension getOwner() {
 		return owner;
 	}
 
 	@Id
-	@Column(name="owner_owner_id")
-	public Integer getOwnerId() {
-		if (owner != null && ownerId == null) {
-			ownerId = owner.getId();
-		}
-		return ownerId;
-	}
-
-	@Id
-	public boolean isValue() {
+	public Boolean isValue() {
 		return value;
 	}
 
-	public void setValue(boolean value) {
+	public void setValue(Boolean value) {
 		this.value = value;
-	}
-
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
 	}
 
 	public void setOwner(AssignmentExtension owner) {
