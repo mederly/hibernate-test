@@ -4,10 +4,13 @@ import org.hibernate.Session;
 
 public class TestMerge {
     public static void main(String[] args) {
-        create();
-        System.out.println("**********************************************************************************");
-        update();
-        HibernateUtil.shutdown();
+        try {
+            create();
+            System.out.println("**********************************************************************************");
+            update();
+        } finally {
+            HibernateUtil.shutdown();
+        }
     }
 
     private static void create() {
