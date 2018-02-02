@@ -1,11 +1,11 @@
-package test;
+package testWithHacks2;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @IdClass(ExtBooleanId.class)
-public class ExtBoolean implements Serializable /*, EntityState */ {
+public class ExtBoolean implements Serializable {
 
 	private AssignmentExtension owner;
 	private Boolean value;
@@ -21,7 +21,7 @@ public class ExtBoolean implements Serializable /*, EntityState */ {
 	}
 
 	@Id
-	public Boolean isValue() {
+	public Boolean getValue() {
 		return value;
 	}
 

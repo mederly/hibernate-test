@@ -1,7 +1,9 @@
-package test;
+package book;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import simple.Child;
+import simple.Parent;
 
 public class HibernateUtil {
 
@@ -10,15 +12,13 @@ public class HibernateUtil {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			Configuration configuration = new Configuration();
-
-			configuration.addAnnotatedClass(AssignmentExtension.class);
-			configuration.addAnnotatedClass(ExtBoolean.class);
-			configuration.addAnnotatedClass(Assignment.class);
+			configuration.addAnnotatedClass(Author.class);
+			configuration.addAnnotatedClass(Publisher.class);
+			configuration.addAnnotatedClass(Book.class);
 			return configuration.configure().buildSessionFactory();
 		} catch (Throwable ex) {
 			ex.printStackTrace();
-			System.exit(0);
-			throw new AssertionError();
+			throw new ExceptionInInitializerError(ex);
 		}
 	}
 
@@ -27,7 +27,6 @@ public class HibernateUtil {
 	}
 
 	public static void shutdown() {
-		// Close caches and connection pools
 		getSessionFactory().close();
 	}
 

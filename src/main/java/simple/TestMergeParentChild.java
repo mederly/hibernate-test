@@ -1,8 +1,8 @@
-package test;
+package simple;
 
 import org.hibernate.Session;
 
-public class TestMerge {
+public class TestMergeParentChild {
     public static void main(String[] args) {
         try {
             create();
@@ -18,19 +18,15 @@ public class TestMerge {
 
         session.beginTransaction();
 
-        Assignment a1 = new Assignment();
-        a1.setOwnerOid("123");
-        a1.setId(10);
+        Parent parent = new Parent();
+        parent.setId(10);
 
-        AssignmentExtension ae1 = new AssignmentExtension();
-        ae1.setOwner(a1);
-        a1.setExtension(ae1);
+        Child child = new Child();
+        child.setParent(parent);
+        parent.getChildren().add(child);
+        child.setValue("old");
 
-        ExtBoolean eb = new ExtBoolean();
-        eb.setOwner(ae1);
-        ae1.getBooleans().add(eb);
-
-        session.save(a1);
+        session.save(parent);
         session.getTransaction().commit();
 
         session.close();
@@ -41,19 +37,17 @@ public class TestMerge {
 
         session.beginTransaction();
 
-        Assignment a1 = new Assignment();
-        a1.setOwnerOid("123");
-        a1.setId(10);
+        Parent parent = new Parent();
+        parent.setId(10);
 
-        AssignmentExtension ae1 = new AssignmentExtension();
-        ae1.setOwner(a1);
-        a1.setExtension(ae1);
+        Child child = new Child();
+        child.setParent(parent);
+        parent.getChildren().add(child);
+        child.setValue("new");
 
-        ExtBoolean eb = new ExtBoolean();
-        eb.setOwner(ae1);
-        ae1.getBooleans().add(eb);
-
-        session.merge(a1);
+        session.merge(parent);
         session.getTransaction().commit();
+
+        session.close();
     }
 }

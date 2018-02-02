@@ -1,4 +1,4 @@
-package test;
+package testWithHacks;
 
 import org.hibernate.Session;
 

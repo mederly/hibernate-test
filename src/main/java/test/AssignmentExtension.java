@@ -1,25 +1,22 @@
 package test;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-/**
- * @author mederly
- */
 @Entity
+@IdClass(AssignmentExtensionId.class)
 public class AssignmentExtension implements Serializable {
 
-    private Assignment owner;
+	private Assignment owner;
 	private Set<ExtBoolean> booleans = new HashSet<>();
 
-//	@GeneratedValue(generator = "ForeignGenerator")
-//	@GenericGenerator(name = "ForeignGenerator", strategy = "org.hibernate.id.ForeignGenerator")
 	@Id
+	@JoinColumns(value = {
+			@JoinColumn(name = "owner_owner_oid", referencedColumnName = "owner_oid"),
+			@JoinColumn(name = "owner_id", referencedColumnName = "id")
+	}, foreignKey = @ForeignKey(name = "fk_assignment_extension_owner"))
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     public Assignment getOwner() {
         return owner;
@@ -36,20 +33,5 @@ public class AssignmentExtension implements Serializable {
 
 	public void setBooleans(Set<ExtBoolean> booleans) {
 		this.booleans = booleans;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof AssignmentExtension))
-			return false;
-		AssignmentExtension that = (AssignmentExtension) o;
-		return Objects.equals(owner, that.owner);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(owner);
 	}
 }

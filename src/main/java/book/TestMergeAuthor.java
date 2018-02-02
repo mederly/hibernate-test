@@ -1,8 +1,10 @@
-package test;
+package book;
 
 import org.hibernate.Session;
+import simple.Child;
+import simple.Parent;
 
-public class TestMerge {
+public class TestMergeAuthor {
     public static void main(String[] args) {
         try {
             create();
@@ -18,19 +20,17 @@ public class TestMerge {
 
         session.beginTransaction();
 
-        Assignment a1 = new Assignment();
-        a1.setOwnerOid("123");
-        a1.setId(10);
+        Publisher publisher = new Publisher();
+        publisher.setName("Addison-Wesley");
+        session.persist(publisher);
 
-        AssignmentExtension ae1 = new AssignmentExtension();
-        ae1.setOwner(a1);
-        a1.setExtension(ae1);
+        Author author = new Author();
+        author.setName("Joshua Bloch");
 
-        ExtBoolean eb = new ExtBoolean();
-        eb.setOwner(ae1);
-        ae1.getBooleans().add(eb);
+        Book book = new Book(author, publisher, "Effective Java");
+        author.getBooks().add(book);
 
-        session.save(a1);
+        session.persist(author);
         session.getTransaction().commit();
 
         session.close();
@@ -41,19 +41,17 @@ public class TestMerge {
 
         session.beginTransaction();
 
-        Assignment a1 = new Assignment();
-        a1.setOwnerOid("123");
-        a1.setId(10);
+        Publisher publisher = session.load(Publisher.class, "Addison-Wesley");
 
-        AssignmentExtension ae1 = new AssignmentExtension();
-        ae1.setOwner(a1);
-        a1.setExtension(ae1);
+        Author author = new Author();
+        author.setName("Joshua Bloch");
 
-        ExtBoolean eb = new ExtBoolean();
-        eb.setOwner(ae1);
-        ae1.getBooleans().add(eb);
+        Book book = new Book(author, publisher, "Effective Java 2nd Ed");
+        author.getBooks().add(book);
 
-        session.merge(a1);
+        session.merge(author);
         session.getTransaction().commit();
+
+        session.close();
     }
 }
