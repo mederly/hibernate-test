@@ -9,13 +9,12 @@ import java.util.Set;
 @Entity
 public class Parent implements Serializable {
 
+	@Id
 	private Integer id;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Set<Child> children = new HashSet<>();
 
-	public Parent() {
-	}
-
-	@Id
 	public Integer getId() {
 		return id;
 	}
@@ -24,7 +23,6 @@ public class Parent implements Serializable {
 		this.id = id;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
 	public Set<Child> getChildren() {
 		return children;
 	}

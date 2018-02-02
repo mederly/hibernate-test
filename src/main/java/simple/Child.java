@@ -6,14 +6,13 @@ import java.io.Serializable;
 @Entity
 public class Child implements Serializable {
 
-	private Parent parent;
-	private String value;
-
-	public Child() {
-	}
-
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Parent parent;
+
+	@Id
+	private String value;
+
 	public Parent getParent() {
 		return parent;
 	}
@@ -22,7 +21,6 @@ public class Child implements Serializable {
 		this.parent = parent;
 	}
 
-	@Id
 	public String getValue() {
 		return value;
 	}
