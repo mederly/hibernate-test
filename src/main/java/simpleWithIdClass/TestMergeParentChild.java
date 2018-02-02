@@ -1,4 +1,4 @@
-package simple;
+package simpleWithIdClass;
 
 import org.hibernate.Session;
 

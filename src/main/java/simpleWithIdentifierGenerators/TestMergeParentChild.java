@@ -1,4 +1,4 @@
-package simpleWithHack;
+package simpleWithIdentifierGenerators;
 
 import org.hibernate.Session;
 

@@ -1,10 +1,10 @@
-package simple;
+package simpleWithIdClass;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
+@IdClass(ChildId.class)
 public class Child implements Serializable {
 
 	private Parent parent;
@@ -30,21 +30,5 @@ public class Child implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Child))
-			return false;
-		Child child = (Child) o;
-		return Objects.equals(parent, child.parent) &&
-				Objects.equals(value, child.value);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(parent, value);
 	}
 }

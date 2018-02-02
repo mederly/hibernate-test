@@ -1,4 +1,4 @@
-package simpleInProgress;
+package simpleWithIdentifierGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;

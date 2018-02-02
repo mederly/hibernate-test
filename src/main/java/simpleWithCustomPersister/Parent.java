@@ -1,4 +1,4 @@
-package simple;
+package simpleWithCustomPersister;
 
 import javax.persistence.*;
 import java.io.Serializable;

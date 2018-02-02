@@ -1,12 +1,13 @@
-package simpleInProgress;
+package simpleWithCustomPersister;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Persister;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Persister(impl = IdProvidingSingleTableEntityPersister.class)
 public class Child implements Serializable {
 
 	private Parent parent;
@@ -17,14 +18,6 @@ public class Child implements Serializable {
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@GenericGenerator(
-			name = "parent",
-			strategy = "simpleInProgress.ParentIdentityGenerator"
-	)
-	@GeneratedValue(
-			generator = "parent",
-			strategy = GenerationType.IDENTITY
-	)
 	public Parent getParent() {
 		return parent;
 	}
@@ -34,14 +27,6 @@ public class Child implements Serializable {
 	}
 
 	@Id
-	@GenericGenerator(
-			name = "value",
-			strategy = "simpleInProgress.ValueIdentityGenerator"
-	)
-	@GeneratedValue(
-			generator = "value",
-			strategy = GenerationType.IDENTITY
-	)
 	public String getValue() {
 		return value;
 	}

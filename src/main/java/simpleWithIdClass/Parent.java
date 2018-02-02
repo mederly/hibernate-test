@@ -1,4 +1,4 @@
-package simpleWithHack;
+package simpleWithIdClass;
 
 import javax.persistence.*;
 import java.io.Serializable;

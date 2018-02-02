@@ -1,8 +1,6 @@
 package book;
 
 import org.hibernate.Session;
-import simple.Child;
-import simple.Parent;
 
 public class TestMergeAuthor {
     public static void main(String[] args) {

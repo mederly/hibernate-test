@@ -1,11 +1,11 @@
-package simpleInProgress;
+package simpleWithIdentifierGenerators;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.IdentityGenerator;
+import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
 
-public class ParentIdentityGenerator extends IdentityGenerator {
+public class ParentIdentifierGenerator implements IdentifierGenerator {
 
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object obj) {

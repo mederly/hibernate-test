@@ -1,4 +1,4 @@
-package simpleInProgress;
+package simpleWithCustomPersister;
 
 import org.hibernate.Session;
 

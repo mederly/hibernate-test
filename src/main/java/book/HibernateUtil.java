@@ -2,8 +2,6 @@ package book;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import simple.Child;
-import simple.Parent;
 
 public class HibernateUtil {
 
