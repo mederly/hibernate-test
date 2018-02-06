@@ -58,7 +58,7 @@ public class TestMerge {
 
         ExtBooleanPK ebPK = new ExtBooleanPK();
         ebPK.setOwner(ae1pk);
-        ebPK.setValue(true);
+        ebPK.setValue(false);
         ExtBoolean eb = new ExtBoolean();
         eb.setPk(ebPK);
         ae1.getBooleans().add(eb);

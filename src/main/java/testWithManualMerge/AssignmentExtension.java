@@ -1,4 +1,4 @@
-package test;
+package testWithManualMerge;
 
 import javax.persistence.*;
 import java.io.Serializable;

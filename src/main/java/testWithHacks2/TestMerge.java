@@ -27,6 +27,7 @@ public class TestMerge {
         a1.setExtension(ae1);
 
         ExtBoolean eb = new ExtBoolean();
+        eb.setValue(true);
         eb.setOwner(ae1);
         ae1.getBooleans().add(eb);
 
@@ -50,6 +51,7 @@ public class TestMerge {
         a1.setExtension(ae1);
 
         ExtBoolean eb = new ExtBoolean();
+        eb.setValue(false);
         eb.setOwner(ae1);
         ae1.getBooleans().add(eb);
 

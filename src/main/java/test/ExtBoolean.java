@@ -2,9 +2,9 @@ package test;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-@IdClass(ExtBooleanId.class)
 public class ExtBoolean implements Serializable /*, EntityState */ {
 
 	private AssignmentExtension owner;
@@ -31,5 +31,22 @@ public class ExtBoolean implements Serializable /*, EntityState */ {
 
 	public void setOwner(AssignmentExtension owner) {
 		this.owner = owner;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof ExtBoolean))
+			return false;
+		ExtBoolean that = (ExtBoolean) o;
+		return Objects.equals(owner, that.owner) &&
+				Objects.equals(value, that.value);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(owner, value);
 	}
 }

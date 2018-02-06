@@ -1,4 +1,4 @@
-package test;
+package testWithManualMerge;
 
 import org.hibernate.Session;
 
@@ -55,6 +55,11 @@ public class TestMerge {
         eb.setOwner(ae1);
         ae1.getBooleans().add(eb);
 
+        System.out.println("Merging ExtBoolean...");
+        session.merge(eb);
+        System.out.println("Merging AssignmentExtension...");
+        session.merge(ae1);
+        System.out.println("Merging Extension...");
         session.merge(a1);
         session.getTransaction().commit();
     }

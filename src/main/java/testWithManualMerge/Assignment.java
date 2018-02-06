@@ -1,4 +1,4 @@
-package test;
+package testWithManualMerge;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,7 +43,6 @@ public class Assignment implements Serializable {
 			@JoinColumn(name = "id", referencedColumnName = "owner_id")
 	}, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)        // this does not work!
 	public AssignmentExtension getExtension() {
 		return extension;
 	}

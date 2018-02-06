@@ -1,20 +1,26 @@
-package test;
+package testWithManualMerge;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ExtBooleanId implements Serializable {
+@Entity
+public class ExtBoolean implements Serializable /*, EntityState */ {
 
 	private AssignmentExtension owner;
 	private Boolean value;
 
-	public ExtBooleanId() {
-	}
-
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//	@JoinColumns(value = {
+//			@JoinColumn(name = "owner_owner_owner_oid", referencedColumnName = "owner_owner_oid"),
+//			@JoinColumn(name = "owner_owner_id", referencedColumnName = "owner_id")
+//	}, foreignKey = @ForeignKey(name = "fk_owner"))
 	public AssignmentExtension getOwner() {
 		return owner;
 	}
 
+	@Id
 	public Boolean isValue() {
 		return value;
 	}
@@ -31,9 +37,9 @@ public class ExtBooleanId implements Serializable {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (!(o instanceof ExtBooleanId))
+		if (!(o instanceof ExtBoolean))
 			return false;
-		ExtBooleanId that = (ExtBooleanId) o;
+		ExtBoolean that = (ExtBoolean) o;
 		return Objects.equals(owner, that.owner) &&
 				Objects.equals(value, that.value);
 	}
