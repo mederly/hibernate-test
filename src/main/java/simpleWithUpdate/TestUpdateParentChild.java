@@ -1,8 +1,8 @@
-package simple;
+package simpleWithUpdate;
 
 import org.hibernate.Session;
 
-public class TestMergeParentChild {
+public class TestUpdateParentChild {
     public static void main(String[] args) {
         try {
             create();
@@ -37,15 +37,13 @@ public class TestMergeParentChild {
 
         session.beginTransaction();
 
-        Parent parent = new Parent();
-        parent.setId(10);
+        Parent parent = session.find(Parent.class, 10);
 
         Child child = new Child();
         child.setParent(parent);
         parent.getChildren().add(child);
         child.setValue("new");
 
-        session.persist(parent);
         session.getTransaction().commit();
 
         session.close();

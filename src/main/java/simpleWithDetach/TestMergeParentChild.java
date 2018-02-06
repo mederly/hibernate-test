@@ -1,19 +1,19 @@
-package simple;
+package simpleWithDetach;
 
 import org.hibernate.Session;
 
 public class TestMergeParentChild {
     public static void main(String[] args) {
         try {
-            create();
+            Parent detached = createAndDetach();
             System.out.println("**********************************************************************************");
-            update();
+            update(detached);
         } finally {
             HibernateUtil.shutdown();
         }
     }
 
-    private static void create() {
+    private static Parent createAndDetach() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
@@ -27,25 +27,28 @@ public class TestMergeParentChild {
         child.setValue("old");
 
         session.save(parent);
+        session.flush();
+        session.detach(parent);
         session.getTransaction().commit();
 
         session.close();
+        return parent;
     }
 
-    private static void update() {
+    private static void update(Parent detached) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
 
-        Parent parent = new Parent();
-        parent.setId(10);
+        Child oldChild = detached.getChildren().iterator().next();
+        Child newChild = new Child();
+        newChild.setParent(detached);
+        newChild.setValue("new");
 
-        Child child = new Child();
-        child.setParent(parent);
-        parent.getChildren().add(child);
-        child.setValue("new");
+        detached.getChildren().add(newChild);
+        detached.getChildren().remove(oldChild);
 
-        session.persist(parent);
+        session.merge(detached);
         session.getTransaction().commit();
 
         session.close();
